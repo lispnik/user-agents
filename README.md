@@ -1,6 +1,7 @@
 # user-agents
 
 [![Tests](https://github.com/lispnik/user-agents/actions/workflows/test.yml/badge.svg)](https://github.com/lispnik/user-agents/actions/workflows/test.yml)
+[![Track upstream dataset](https://github.com/lispnik/user-agents/actions/workflows/update-data.yml/badge.svg)](https://github.com/lispnik/user-agents/actions/workflows/update-data.yml)
 
 A Common Lisp port of [intoli/user-agents](https://github.com/intoli/user-agents).
 
