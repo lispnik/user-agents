@@ -15,10 +15,17 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y sbcl
       - name: Install ocicl
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          git clone --depth 1 https://github.com/ocicl/ocicl /tmp/ocicl
-          make -C /tmp/ocicl
-          sudo make -C /tmp/ocicl install
+          # Use the prebuilt release binary; building ocicl from source would
+          # mean compiling a large Lisp tree on every run.
+          gh release download -R ocicl/ocicl \
+            --pattern 'ocicl-*-linux-amd64.tar.gz' -O /tmp/ocicl.tar.gz --clobber
+          mkdir -p /tmp/ocicl-bin
+          tar -xzf /tmp/ocicl.tar.gz -C /tmp/ocicl-bin
+          sudo install -m 0755 /tmp/ocicl-bin/ocicl /usr/local/bin/ocicl
+          ocicl version
           ocicl setup >> ~/.sbclrc
       - name: Install dependencies
         run: ocicl install
