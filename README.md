@@ -1,5 +1,7 @@
 # user-agents
 
+[![Tests](https://github.com/lispnik/user-agents/actions/workflows/test.yml/badge.svg)](https://github.com/lispnik/user-agents/actions/workflows/test.yml)
+
 A Common Lisp port of [intoli/user-agents](https://github.com/intoli/user-agents).
 
 It vendors the same dataset of real-world user agents that the upstream
@@ -15,7 +17,7 @@ tests written with [FiveAM](https://github.com/lispci/fiveam).
 ## Installation
 
 ```sh
-git clone <this repository> user-agents
+git clone https://github.com/lispnik/user-agents.git
 cd user-agents
 ocicl install
 ```
@@ -221,8 +223,26 @@ The interface is Lisp rather than a transliteration of the JavaScript one:
   `ua:none-of`, and accepts keywords as case-insensitive string values.
 * Field names are kebab-case keywords rather than camelCase strings.
 
+## Credits
+
+This library is a port, and the interesting parts are not mine. The dataset, the
+work of collecting and weighting real-world user agents, and the design this
+port follows are all from
+[intoli/user-agents](https://github.com/intoli/user-agents) by
+[Intoli, LLC](https://intoli.com) — including the weighting scheme that makes a
+random draw resemble real traffic rather than a uniform sample of browsers, and
+the filter semantics reproduced here.
+
+`data/user-agents.json.gz` is a verbatim copy of the file that project generates
+and publishes, refreshed directly from their repository; see
+[Versioning](#versioning). If you find this library useful, the credit belongs
+upstream.
+
+This port is not affiliated with or endorsed by Intoli.
+
 ## License
 
 BSD-2-Clause; see `LICENSE`. The vendored dataset comes from
 [intoli/user-agents](https://github.com/intoli/user-agents), also BSD-2-Clause,
-whose copyright notice is retained in `LICENSE.upstream`.
+whose copyright notice is retained in `LICENSE.upstream` as that license
+requires.
