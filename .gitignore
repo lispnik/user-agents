@@ -1,0 +1,9 @@
+# ocicl vendors dependencies here; ocicl.csv is the lockfile and is committed.
+ocicl/
+systems/
+*.fasl
+*.fas
+*.lib
+*.dfsl
+*.o
+.cache/

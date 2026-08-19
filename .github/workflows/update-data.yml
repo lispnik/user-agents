@@ -1,0 +1,73 @@
+# Watches the upstream dataset and releases a new version of this port whenever
+# it changes.  The whole decision is made by scripts/update-data.sh: it compares
+# the sha256 of the freshly downloaded file against the vendored one, and only
+# then bumps the version, regenerates src/version.lisp and writes a changelog
+# entry.  Nothing happens on the (common) days when upstream is unchanged.
+name: Track upstream dataset
+
+on:
+  schedule:
+    # Daily at 06:15 UTC.
+    - cron: '15 6 * * *'
+  workflow_dispatch:
+    inputs:
+      upstream_ref:
+        description: 'Upstream git ref to pull the dataset from'
+        required: false
+        default: 'master'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install SBCL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sbcl
+
+      - name: Install ocicl
+        run: |
+          git clone --depth 1 https://github.com/ocicl/ocicl /tmp/ocicl
+          make -C /tmp/ocicl
+          sudo make -C /tmp/ocicl install
+          ocicl setup >> ~/.sbclrc
+
+      - name: Install dependencies
+        run: ocicl install
+
+      - name: Check upstream and version the port
+        id: update
+        env:
+          UPSTREAM_REF: ${{ github.event.inputs.upstream_ref || 'master' }}
+        run: ./scripts/update-data.sh
+
+      - name: Run the test suite against the new dataset
+        if: steps.update.outputs.changed == 'true'
+        run: sbcl --noinform --non-interactive --eval '(asdf:test-system :user-agents)'
+
+      - name: Commit, tag and push the release
+        if: steps.update.outputs.changed == 'true'
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/user-agents.json.gz data/upstream.sexp version.sexp \
+                  src/version.lisp CHANGELOG.md
+          git commit -m "Release ${{ steps.update.outputs.version }}: update user agent dataset
+
+          ${{ steps.update.outputs.records }} records from intoli/user-agents."
+          git tag -a "v${{ steps.update.outputs.version }}" \
+                  -m "Version ${{ steps.update.outputs.version }}"
+          git push origin HEAD --follow-tags
+
+      - name: Report
+        run: |
+          if [ "${{ steps.update.outputs.changed }}" = "true" ]; then
+            echo "Released v${{ steps.update.outputs.version }} (${{ steps.update.outputs.records }} records)." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Upstream dataset unchanged; still at v${{ steps.update.outputs.version }}." >> "$GITHUB_STEP_SUMMARY"
+          fi
