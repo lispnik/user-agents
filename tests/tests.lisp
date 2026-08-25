@@ -195,6 +195,24 @@ was released without re-running the updater."
   (is (eq (ua:make-pool) (ua:make-pool)))
   (is (eq (ua:make-pool) (ua:make-pool nil))))
 
+(test pools-can-be-built-before-anything-touches-the-dataset
+  "The first data access a program makes may well be MAKE-USER-AGENT itself.
+
+DEFAULT-POOL holds the dataset lock while BUILD-POOL asks for the dataset,
+which acquires it again when nothing has loaded it yet. Every other test in
+this file masks that by reading the dataset first, so this one clears the
+caches to reproduce a cold image. The LET bindings are thread-local, so the
+caches the rest of the suite relies on are restored on the way out."
+  (let ((user-agents::%user-agents nil)
+        (user-agents::%default-pool nil))
+    (is (ua:user-agent-p (ua:make-user-agent)))
+    (is (= (ua:user-agent-count) (ua:pool-size (ua:make-pool)))))
+  ;; The same, for a filtered pool, which reaches the dataset by a different
+  ;; route: BUILD-POOL directly rather than through DEFAULT-POOL.
+  (let ((user-agents::%user-agents nil)
+        (user-agents::%default-pool nil))
+    (is (plusp (ua:pool-size (ua:make-pool '(:device-category :mobile)))))))
+
 (test pool-weights-form-a-normalized-distribution
   (dolist (filter (list nil '(:device-category :mobile) (ua:regex "Safari")))
     (let* ((pool (ua:make-pool filter))

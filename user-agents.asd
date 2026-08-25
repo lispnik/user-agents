@@ -32,6 +32,20 @@ screen size or anything else in a record."
                (:static-file "LICENSE.upstream"))
   :in-order-to ((test-op (test-op "user-agents/tests"))))
 
+(defsystem "user-agents/examples"
+  :description "Worked examples: user-agents combined with other libraries."
+  :author "Matthew Kennedy <burnsidemk@gmail.com>"
+  :license "BSD-2-Clause"
+  :version (:read-file-form "version.sexp")
+  :depends-on ("user-agents" "curlcl")
+  ;; Each example lives in its own package and uses only exported symbols.
+  ;; That is the point of them being a system rather than loose scripts: if an
+  ;; example needs a `user-agents::' symbol, the API has a hole, and loading
+  ;; this is what makes that fail loudly.
+  :components ((:module "examples"
+                :components ((:module "rotating-user-agent"
+                              :components ((:file "rotating-user-agent")))))))
+
 (defsystem "user-agents/tests"
   :description "Test suite for the user-agents system."
   :author "Matthew Kennedy <burnsidemk@gmail.com>"

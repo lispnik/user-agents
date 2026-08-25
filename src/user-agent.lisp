@@ -97,7 +97,7 @@
 (defun default-pool ()
   "The cached pool covering the whole dataset."
   (or %default-pool
-      (bordeaux-threads:with-lock-held (%data-lock)
+      (bordeaux-threads:with-recursive-lock-held (%data-lock)
         (or %default-pool
             (setf %default-pool (build-pool nil))))))
 

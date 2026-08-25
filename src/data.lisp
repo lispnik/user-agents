@@ -92,7 +92,11 @@ this to a freshly downloaded upstream file and call RELOAD-DATA to use it.")
 ;;; ---------------------------------------------------------------------------
 ;;; Lazy, thread-safe cache
 
-(defvar %data-lock (bordeaux-threads:make-lock "user-agents data"))
+(defvar %data-lock (bordeaux-threads:make-recursive-lock "user-agents data")
+  "Guards the dataset and pool caches.
+
+Recursive on purpose: DEFAULT-POOL holds it while BUILD-POOL asks for the
+dataset, which acquires it again when the dataset has not been loaded yet.")
 (defvar %user-agents nil
   "Cached simple-vector of user agent plists, or NIL when not yet loaded.")
 (defvar %default-pool nil
@@ -104,7 +108,7 @@ this to a freshly downloaded upstream file and call RELOAD-DATA to use it.")
 The vector and the plists in it are shared; treat them as read-only.  Use
 USER-AGENT-DATA or TOP when you want copies you may modify."
   (or %user-agents
-      (bordeaux-threads:with-lock-held (%data-lock)
+      (bordeaux-threads:with-recursive-lock-held (%data-lock)
         (or %user-agents
             (setf %user-agents (load-user-agents))))))
 
@@ -116,7 +120,7 @@ USER-AGENT-DATA or TOP when you want copies you may modify."
   "Re-read the dataset, optionally from PATHNAME, and discard cached pools.
 
 Returns the number of records loaded."
-  (bordeaux-threads:with-lock-held (%data-lock)
+  (bordeaux-threads:with-recursive-lock-held (%data-lock)
     (when pathname
       (setf *data-file* (pathname pathname)))
     (let ((records (load-user-agents (data-file))))

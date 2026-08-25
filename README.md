@@ -201,6 +201,34 @@ To try a dataset without vendoring it, point `ua:*data-file*` at it:
 (ua:reload-data #p"/tmp/user-agents.json.gz")
 ```
 
+## Examples
+
+`user-agents/examples` is a separate system, so the library itself never
+depends on what an example happens to use:
+
+```lisp
+(asdf:load-system :user-agents/examples)
+(rotating-user-agent:report-device-mix 2000)
+```
+
+`examples/rotating-user-agent/` combines this library with
+[curlcl](https://github.com/lispnik/curlcl): `user-agents` decides what a
+request should claim to be, curlcl sends it. It draws a usage-weighted user
+agent, sends it along with a matching `Accept-Language`, and shows the shape
+both libraries share — build the expensive thing once (a pool, a session) and
+reuse it across a run of requests.
+
+```lisp
+(rotating-user-agent:fetch :filter '(:device-category :mobile))
+(rotating-user-agent:survey 10 :filter (ua:regex "Firefox"))
+```
+
+Each example lives in its own package and uses only exported symbols, which is
+the point of shipping them as a system rather than as loose scripts: if an
+example reaches for a `user-agents::` symbol, the API has a hole. That is not
+hypothetical — writing this one is what surfaced a deadlock on the very first
+call into a cold image.
+
 ## Tests
 
 ```sh

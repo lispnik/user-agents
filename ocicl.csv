@@ -3,12 +3,20 @@ babel, ghcr.io/ocicl/babel@sha256:9d9fcde71acc2b5c39572de4f11756a08c1d8801caa86c
 babel-streams, ghcr.io/ocicl/babel@sha256:9d9fcde71acc2b5c39572de4f11756a08c1d8801caa86c581b85dabaa35928b3, babel-20250905-4eaf3f2/babel-streams.asd
 babel-tests, ghcr.io/ocicl/babel@sha256:9d9fcde71acc2b5c39572de4f11756a08c1d8801caa86c581b85dabaa35928b3, babel-20250905-4eaf3f2/babel-tests.asd
 bordeaux-threads, ghcr.io/ocicl/bordeaux-threads@sha256:bbb32afe3987e102149cc019f4f7366a05f7a37d1503f5f86a27745e671c320a, bordeaux-threads-0.9.4/bordeaux-threads.asd
+cffi, ghcr.io/ocicl/cffi@sha256:ff62b9cedea80fe2c6ea0701757e2b301b6ee9aafa1ae720966ff2611e94f76b, cffi-20260821-787d3cd/cffi.asd
+cffi-examples, ghcr.io/ocicl/cffi@sha256:ff62b9cedea80fe2c6ea0701757e2b301b6ee9aafa1ae720966ff2611e94f76b, cffi-20260821-787d3cd/cffi-examples.asd
+cffi-grovel, ghcr.io/ocicl/cffi@sha256:ff62b9cedea80fe2c6ea0701757e2b301b6ee9aafa1ae720966ff2611e94f76b, cffi-20260821-787d3cd/cffi-grovel.asd
+cffi-libffi, ghcr.io/ocicl/cffi@sha256:ff62b9cedea80fe2c6ea0701757e2b301b6ee9aafa1ae720966ff2611e94f76b, cffi-20260821-787d3cd/cffi-libffi.asd
+cffi-tests, ghcr.io/ocicl/cffi@sha256:ff62b9cedea80fe2c6ea0701757e2b301b6ee9aafa1ae720966ff2611e94f76b, cffi-20260821-787d3cd/cffi-tests.asd
+cffi-toolchain, ghcr.io/ocicl/cffi@sha256:ff62b9cedea80fe2c6ea0701757e2b301b6ee9aafa1ae720966ff2611e94f76b, cffi-20260821-787d3cd/cffi-toolchain.asd
+cffi-uffi-compat, ghcr.io/ocicl/cffi@sha256:ff62b9cedea80fe2c6ea0701757e2b301b6ee9aafa1ae720966ff2611e94f76b, cffi-20260821-787d3cd/cffi-uffi-compat.asd
 chipz, ghcr.io/ocicl/chipz@sha256:fae0fae0c93199ba57c92d9102245a55c8a2c12af4442e0b141d5670bef4f2f0, chipz-20240503-6f80368/chipz.asd
 cl-ppcre, ghcr.io/ocicl/cl-ppcre@sha256:bf073924cf4fd5957a4fd961a95d446ed0e53fa32a5002cbd2d52182874f45e5, cl-ppcre-20250606-a2ea581/cl-ppcre.asd
 cl-ppcre-unicode, ghcr.io/ocicl/cl-ppcre@sha256:bf073924cf4fd5957a4fd961a95d446ed0e53fa32a5002cbd2d52182874f45e5, cl-ppcre-20250606-a2ea581/cl-ppcre-unicode.asd
 closer-mop, ghcr.io/ocicl/closer-mop@sha256:39ec579e68118a8be57a7882812ff31094a031f88b77f11cf4434a92261f1126, closer-mop-20260329-04db182/closer-mop.asd
 com.inuoe.jzon, ghcr.io/ocicl/com.inuoe.jzon@sha256:b0cfbc3d8fb3c09526d92575b40b13a68ad93be7edeb48fd69dcea053c5611a5, jzon-20251113-f05afbb/com.inuoe.jzon.asd
 com.inuoe.jzon-tests, ghcr.io/ocicl/com.inuoe.jzon@sha256:b0cfbc3d8fb3c09526d92575b40b13a68ad93be7edeb48fd69dcea053c5611a5, jzon-20251113-f05afbb/com.inuoe.jzon-tests.asd
+curlcl, ghcr.io/ocicl/curlcl@sha256:ee4df457d172a0952c84a072ef036985da18814005938f36db3f67ccabe16329, curlcl-20260822-4bd9cfd/curlcl.asd
 documentation-utils, ghcr.io/ocicl/documentation-utils@sha256:b2a1b3f3bcd1a738af85ae2b0168d408c177661eab6d6bbebb254e394d983f54, documentation-utils-20230511-98630dd/documentation-utils.asd
 fiveam, ghcr.io/ocicl/fiveam@sha256:e283043dc8d31e8df2b214465cf5a06ea07bdbea10e600a40e17aaf9518226ac, fiveam-20240928-e43d6c8/fiveam.asd
 flexi-streams, ghcr.io/ocicl/flexi-streams@sha256:95005b06a8a95c82780c75ead53810bcb273d07fcf5fe76b527f1856df9923f2, flexi-streams-20240503-4951d57/flexi-streams.asd
@@ -28,3 +36,4 @@ trivial-garbage, ghcr.io/ocicl/trivial-garbage@sha256:a85dcf4110ad60ae9f6c70970a
 trivial-gray-streams, ghcr.io/ocicl/trivial-gray-streams@sha256:9d702556e5973fd18e67642b18bd5a2f901972ef7d5b134615e2f5fd77396bb9, trivial-gray-streams-20260818-257d73e/trivial-gray-streams.asd
 trivial-gray-streams-test, ghcr.io/ocicl/trivial-gray-streams@sha256:9d702556e5973fd18e67642b18bd5a2f901972ef7d5b134615e2f5fd77396bb9, trivial-gray-streams-20260818-257d73e/trivial-gray-streams-test.asd
 trivial-indent, ghcr.io/ocicl/trivial-indent@sha256:f836220f8b42c9fef8e8e48e94ffa4435be2a743d5c668ae889304a6ac1e29d2, trivial-indent-20260812-5905ac0/trivial-indent.asd
+uffi, ghcr.io/ocicl/cffi@sha256:ff62b9cedea80fe2c6ea0701757e2b301b6ee9aafa1ae720966ff2611e94f76b, cffi-20260821-787d3cd/uffi-compat/uffi.asd
