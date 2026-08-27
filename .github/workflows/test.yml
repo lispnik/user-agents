@@ -31,3 +31,8 @@ jobs:
         run: ocicl install
       - name: Run tests
         run: sbcl --noinform --non-interactive --eval '(asdf:test-system :user-agents)'
+      - name: Load the examples
+        # The examples are a separate system that test-op does not reach.  They
+        # use only exported symbols, so loading them is what catches a hole in
+        # the public API.
+        run: sbcl --noinform --non-interactive --eval '(asdf:load-system :user-agents/examples)'
