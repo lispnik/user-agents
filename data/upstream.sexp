@@ -1,5 +1,5 @@
 ;;;; upstream.sexp --- GENERATED. Provenance of data/user-agents.json.gz.
-(:upstream-version "2.1.190" :sha256
- "5053cd5f2700df507449def4a6b2ef10ac2afa30d9c71faaf812816e6cffc4fe" :retrieved
- "2026-09-21" :record-count 10000 :source-url
+(:upstream-version "2.1.191" :sha256
+ "21f59cfe51a4eb7aeb3f61bc31e7225509749a70568d2b71d925ec9c4e0229ca" :retrieved
+ "2026-09-22" :record-count 10000 :source-url
  "https://raw.githubusercontent.com/intoli/user-agents/master/src/user-agents.json.gz")
