@@ -1,2 +1,2 @@
 ;;;; version.sexp --- GENERATED. Version of this port; read by user-agents.asd.
-"1.0.41"
+"1.0.42"
