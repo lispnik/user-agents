@@ -28,7 +28,16 @@ jobs:
           ocicl version
           ocicl setup >> ~/.sbclrc
       - name: Install dependencies
-        run: ocicl install
+        # ghcr.io intermittently resets connections mid-download, and ocicl's
+        # own retries sometimes aren't enough.  Rerunning is cheap: packages
+        # already fetched are skipped.
+        run: |
+          for attempt in 1 2 3; do
+            ocicl install && exit 0
+            echo "ocicl install failed (attempt $attempt); retrying in 15s"
+            sleep 15
+          done
+          exit 1
       - name: Run tests
         run: sbcl --noinform --non-interactive --eval '(asdf:test-system :user-agents)'
       - name: Load the examples
