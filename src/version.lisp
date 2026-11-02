@@ -10,19 +10,19 @@
 (in-package #:user-agents)
 
 (defparameter *version*
-  "1.0.70"
+  "1.0.71"
   "Version of this Common Lisp port. The patch component is bumped automatically whenever the vendored upstream dataset changes.")
 
 (defparameter *upstream-version*
-  "2.1.231"
+  "2.1.232"
   "Version of the intoli/user-agents npm package the vendored dataset came from.")
 
 (defparameter *data-sha256*
-  "43ff4e0713ffef9b4efcc91dd06150c0eda690a8c2559933cf2e5faef91281d9"
+  "1033aef7f76795ac96cdd143622bd34d36b057db2956ea2f33c5baa70295cfba"
   "SHA-256 of data/user-agents.json.gz, used to detect upstream changes.")
 
 (defparameter *data-retrieved*
-  "2026-11-01"
+  "2026-11-02"
   "Date the vendored dataset was downloaded, as YYYY-MM-DD.")
 
 (defparameter *data-record-count*
