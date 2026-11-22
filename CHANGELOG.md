@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.90 - 2026-11-22
+
+- Vendored the upstream dataset from intoli/user-agents 2.1.252.
+- 10,000 user agent records; SHA-256 `f0130f824651d32796d4a28ede72ee065dc70dec57f822c90d3a0d05fe0247a6`.
+
 ## 1.0.89 - 2026-11-21
 
 - Vendored the upstream dataset from intoli/user-agents 2.1.251.
